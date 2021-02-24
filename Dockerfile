@@ -6,4 +6,4 @@ ADD package.json ./
 
 RUN npm i
 
-CMD zip -r ${PATH} "$(date +%F).zip"  && node script
+CMD zip -r ${LOCATION} "$(date +%F).zip"  && node script
