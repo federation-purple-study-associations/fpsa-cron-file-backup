@@ -4,6 +4,7 @@ WORKDIR /mnt
 ADD script.js ./
 ADD package.json ./
 
+RUN apk add zip
 RUN npm i
 
 CMD zip -r ${LOCATION} "$(date +%F).zip"  && node script
