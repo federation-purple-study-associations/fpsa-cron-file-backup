@@ -1,0 +1,47 @@
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: database-backup-cronjob
+  namespace: fpsa
+spec:
+  schedule: 0 1 * * *
+  successfulJobsHistoryLimit: 0
+  failedJobsHistoryLimit: 2
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          imagePullSecrets:
+          - name: regcred
+          restartPolicy: Never
+          containers:
+          - image: "docker.pkg.github.com/federation-purple-study-associations/fpsa-cron-file-backup/cronjob:{{.Values.tag}}"
+            name: database-backup
+            env:
+            - name: PATH
+              value: "{{.Values.PATH}}"
+            - name: USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: mailing
+                  key: SMTP_USERNAME
+            - name: PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mailing
+                  key: SMTP_PASSWORD
+            - name: FOLDERID
+              valueFrom:
+                secretKeyRef:
+                  name: backupcron
+                  key: FOLDERID
+            - name: TENANTID
+              valueFrom:
+                secretKeyRef:
+                  name: backupcron
+                  key: TENANTID
+            - name: CLIENTID
+              valueFrom:
+                secretKeyRef:
+                  name: backupcron
+                  key: CLIENTID

@@ -1,0 +1,23 @@
+{
+  "name": "fpsa-cron-file-backup",
+  "version": "1.0.0",
+  "description": "",
+  "main": "script.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/federation-purple-study-associations/fpsa-cron-database-backup.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/federation-purple-study-associations/fpsa-cron-database-backup/issues"
+  },
+  "homepage": "https://github.com/federation-purple-study-associations/fpsa-cron-database-backup#readme",
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "node-fetch": "^2.6.1"
+  }
+}

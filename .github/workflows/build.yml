@@ -1,0 +1,39 @@
+name: Publish image
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Docker login
+      run: docker login docker.pkg.github.com -u bastiaanv -p ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Build the Docker image
+      run: docker build . -f Dockerfile -t docker.pkg.github.com/federation-purple-study-associations/fpsa-cron-file-backup/cronjob:${{github.sha}}
+    
+    - name: Publish image
+      run: docker push docker.pkg.github.com/federation-purple-study-associations/fpsa-cron-file-backup/cronjob:${{github.sha}}
+
+    - name: Deploy
+      uses: 'deliverybot/helm@master'
+      with:
+        release: 'fpsa-backup'
+        namespace: 'fpsa'
+        chart: 'chart'
+        helm: 'helm3'
+        timeout: 2m30s
+        token: '${{ github.token }}'
+        values: |
+          tag: '${{ github.sha }}'
+      env:
+        KUBECONFIG_FILE: '${{ secrets.KUBECONFIG }}'
