@@ -27,7 +27,7 @@ jobs:
     - name: Deploy
       uses: 'deliverybot/helm@master'
       with:
-        release: 'fpsa-backup'
+        release: 'fpsa-file-backup'
         namespace: 'fpsa'
         chart: 'chart'
         helm: 'helm3'
