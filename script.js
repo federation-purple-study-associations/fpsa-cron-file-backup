@@ -32,9 +32,12 @@ fetch(`https://login.microsoftonline.com/${process.env.TENANTID}/oauth2/v2.0/tok
                 body: stream
             })
             .then(function(res) {
-                return res.json();
+                console.log(res.status)
+                return res.text();
             }).then(function(json) {
                 console.log(json);
+            }).catch((err) => {
+                console.log(err)
             });
         }
     });
