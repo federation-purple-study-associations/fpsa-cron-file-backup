@@ -7,4 +7,4 @@ ADD package.json ./
 RUN apk add zip
 RUN npm i
 
-CMD zip -r ${LOCATION} "$(date +%F).zip"  && node script
+CMD zip -r  "$(date +%F).zip" ${LOCATION} && node script
