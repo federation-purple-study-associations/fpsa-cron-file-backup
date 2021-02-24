@@ -19,10 +19,10 @@ jobs:
       run: docker login docker.pkg.github.com -u bastiaanv -p ${{ secrets.GITHUB_TOKEN }}
 
     - name: Build the Docker image
-      run: docker build . -f Dockerfile -t docker.pkg.github.com/federation-purple-study-associations/fpsa-cron-file-backup/cronjob:${{github.sha}}
+      run: docker build . -f Dockerfile -t docker.pkg.github.com/federation-purple-study-associations/fpsa-cron-file-backup/file-cronjob:${{github.sha}}
     
     - name: Publish image
-      run: docker push docker.pkg.github.com/federation-purple-study-associations/fpsa-cron-file-backup/cronjob:${{github.sha}}
+      run: docker push docker.pkg.github.com/federation-purple-study-associations/fpsa-cron-file-backup/file-cronjob:${{github.sha}}
 
     - name: Deploy
       uses: 'deliverybot/helm@master'

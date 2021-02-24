@@ -1,7 +1,7 @@
 apiVersion: batch/v1beta1
 kind: CronJob
 metadata:
-  name: database-backup-cronjob
+  name: file-backup-cronjob
   namespace: fpsa
 spec:
   schedule: 0 1 * * *
@@ -15,8 +15,8 @@ spec:
           - name: regcred
           restartPolicy: Never
           containers:
-          - image: "docker.pkg.github.com/federation-purple-study-associations/fpsa-cron-file-backup/cronjob:{{.Values.tag}}"
-            name: database-backup
+          - image: "docker.pkg.github.com/federation-purple-study-associations/fpsa-cron-file-backup/file-cronjob:{{.Values.tag}}"
+            name: file-backup
             env:
             - name: PATH
               value: "{{.Values.PATH}}"
