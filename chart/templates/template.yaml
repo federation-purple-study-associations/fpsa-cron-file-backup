@@ -13,10 +13,17 @@ spec:
         spec:
           imagePullSecrets:
           - name: regcred
+          volumes:
+          - name: storage
+            persistentVolumeClaim:
+              claimName: fpsa-api-volume-claim
           restartPolicy: Never
           containers:
           - image: "docker.pkg.github.com/federation-purple-study-associations/fpsa-cron-file-backup/file-cronjob:{{.Values.tag}}"
             name: file-backup
+            volumeMounts:
+            - mountPath: {{.Values.PATH}}
+              name: storage
             env:
             - name: LOCATION
               value: "{{.Values.PATH}}"
