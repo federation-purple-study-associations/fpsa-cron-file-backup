@@ -36,8 +36,6 @@ fetch(`https://login.microsoftonline.com/${process.env.TENANTID}/oauth2/v2.0/tok
             }).then(function(json) {
                 console.log(json);
             });
-        } else {
-            console.log('REEEEEE')
         }
     });
 });
