@@ -25,7 +25,7 @@ jobs:
       run: docker push docker.pkg.github.com/federation-purple-study-associations/fpsa-cron-file-backup/file-cronjob:${{github.sha}}
 
     - name: Deploy
-      uses: 'deliverybot/helm@master'
+      uses: elseu/sdu-helm-deploy-action@0.0.9
       with:
         release: 'fpsa-file-backup'
         namespace: 'fpsa'
